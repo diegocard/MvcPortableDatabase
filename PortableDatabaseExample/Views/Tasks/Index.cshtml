@@ -1,0 +1,43 @@
+@model IEnumerable<PortableDatabaseExample.Models.Task>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="datatable">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Done</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+			    @String.Format("{0:g}", item.Date)
+            </td>
+            <td>
+			    @item.Description
+            </td>
+            <td>
+			    @item.Done
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+

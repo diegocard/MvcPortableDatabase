@@ -1,0 +1,26 @@
+@model PortableDatabaseExample.Models.Task
+
+@{
+    ViewBag.Title = "Task details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">Date</div>
+    <div class="display-field">@String.Format("{0:g}", Model.Date)</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+
+    <div class="display-label">Done</div>
+    <div class="display-field">@Model.Done</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

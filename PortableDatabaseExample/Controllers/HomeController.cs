@@ -1,6 +1,4 @@
-﻿using PortableDatabaseExample.Models;
-using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace PortableDatabaseExample.Controllers
 {
@@ -11,25 +9,7 @@ namespace PortableDatabaseExample.Controllers
 
         public ActionResult Index()
         {
-            try
-            {
-                SQLiteTestModel testCE = new SQLiteTestModel();
-                Purchase purchase = new Purchase()
-                {
-                    Date = DateTime.Now,
-                    ID = 1,
-                    Price = 100,
-                    ProductName = "test",
-                };
-                testCE.Purchases.Add(purchase);
-                testCE.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-            }
-            return View();
+            return RedirectToAction("Index", "Tasks");
         }
-
     }
 }
