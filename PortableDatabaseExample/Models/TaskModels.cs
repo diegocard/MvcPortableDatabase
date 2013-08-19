@@ -4,7 +4,7 @@ namespace PortableDatabaseExample.Models
 {
     public class Task
     {
-        public int ID             { get; set; }
+        public long ID            { get; set; }
         [Required]
         public DateTime Date      { get; set; }
         [Required]

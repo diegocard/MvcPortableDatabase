@@ -144,6 +144,7 @@
     <Compile Include="Repository\SqlCEContext.cs" />
     <Compile Include="Repository\TaskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\TaskRepositoryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SQL_CE_DB.sdf" />
@@ -213,7 +214,6 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\SqliteDB_Old.db" />
     <None Include="App_Data\SqliteDB.db" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

@@ -1,34 +1,26 @@
 using PortableDatabaseExample.Models;
+using PortableDatabaseExample.Repository;
 using System.Web.Mvc;
 
 namespace PortableDatabaseExample.Controllers
 {   
 	public class TasksController : Controller
 	{
-		private ITaskRepository taskRepository;
-
-		// If you are using Dependency Injection, you can delete the following constructor
-		public TasksController() : this(new TaskRepository(true))
-		{
-		}
-
-		public TasksController(ITaskRepository taskRepository)
-		{
-			this.taskRepository = taskRepository;
-		}
-
-		//
+    	//
 		// GET: /Tasks/
 
-		public ViewResult Index(bool useSqlCE = true)
+		public ViewResult Index(bool? useSqlCE)
 		{
-			ManageRepository(useSqlCE);
+            ITaskRepository taskRepository;
+            if (useSqlCE.HasValue)
+            {
+                taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository(useSqlCE.Value);
+            }
+            else
+            {
+                taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
+            }
 			return View(taskRepository.All);
-		}
-
-		private void ManageRepository(bool useSqlCE)
-		{
-            this.taskRepository = new TaskRepository(useSqlCE);
 		}
 
 		//
@@ -36,6 +28,7 @@ namespace PortableDatabaseExample.Controllers
 
 		public ViewResult Details(int id)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			return View(taskRepository.Find(id));
 		}
 
@@ -53,10 +46,11 @@ namespace PortableDatabaseExample.Controllers
 		[HttpPost]
 		public ActionResult Create(Task task)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			if (ModelState.IsValid) {
 				taskRepository.InsertOrUpdate(task);
 				taskRepository.Save();
-				return RedirectToAction("Index");
+                return RedirectToAction("Index", "Tasks");
 			} else {
 				return View();
 			}
@@ -67,6 +61,7 @@ namespace PortableDatabaseExample.Controllers
  
 		public ActionResult Edit(int id)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			 return View(taskRepository.Find(id));
 		}
 
@@ -76,6 +71,7 @@ namespace PortableDatabaseExample.Controllers
 		[HttpPost]
 		public ActionResult Edit(Task task)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			if (ModelState.IsValid) {
 				taskRepository.InsertOrUpdate(task);
 				taskRepository.Save();
@@ -90,6 +86,7 @@ namespace PortableDatabaseExample.Controllers
  
 		public ActionResult Delete(int id)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			return View(taskRepository.Find(id));
 		}
 
@@ -99,18 +96,11 @@ namespace PortableDatabaseExample.Controllers
 		[HttpPost, ActionName("Delete")]
 		public ActionResult DeleteConfirmed(int id)
 		{
+            ITaskRepository taskRepository = TaskRepositoryFactory.Instance.GetTaskRepository();
 			taskRepository.Delete(id);
 			taskRepository.Save();
 
 			return RedirectToAction("Index");
-		}
-
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing) {
-				taskRepository.Dispose();
-			}
-			base.Dispose(disposing);
 		}
 	}
 }
