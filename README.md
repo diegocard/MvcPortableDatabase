@@ -9,7 +9,7 @@ This code was used to write [this post](http://codedwell.wordpress.com/2013/08/1
 on my [blog](http://codedwell.wordpress.com/).
 
 TODO:
- - Develop webpages that let the user view the data in both databases (scaffold).
+ - Add a database selector on the Index view.
 
 Note:
 The code that manages SQLite was not authored by me. Please visit the [System.Data.SQLite](http://system.data.sqlite.org/) website for more information. 
