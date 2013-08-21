@@ -5,7 +5,7 @@ A solution containing 2 preconfigured portable databases: SQL Server Compact (SQ
 
 The solution portraits the following concepts:
  - How to structure your solution to alternate data sources in runtime.
- - Portable database solutions (showcase, benefits and limitations).
+ - Portable database alternatives (showcase, benefits and limitations).
  - How to configure your solution to use SQL Server Compact and/or SQLite.
 
 This code was used to write [this post](http://codedwell.wordpress.com/2013/08/18/sql-server-compact-vs-sqlite/) 
